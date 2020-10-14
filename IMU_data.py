@@ -2,7 +2,7 @@ from time import sleep
 from sense_emu import SenseHat
 from PIL import Image, ImageDraw
 import time
-import datetime
+from datetime import datetime
 import os
 
 #Create object to get data from the SenseHAT Emulator
@@ -12,7 +12,7 @@ sleep(5)
 hat.clear()
 
 #Get the current date and time to use as filenaame
-fname = time.strftime("%Y-%m-%d %X", time.localtime())
+fname = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
 path = os.path.join('/home/pi/Desktop/'+str(fname)+'.txt')
 
 

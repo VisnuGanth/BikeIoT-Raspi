@@ -4,7 +4,7 @@ import logging
 import time
 import argparse
 import json
-import datetime
+from datetime import datetime
 import os
 from sense_emu import SenseHat
 
@@ -132,7 +132,7 @@ while True:
         gyro_data.append(round(gyro["roll"],2))
         
         #Get the current date and time to use as timestamp
-        timestamp = time.strftime("%Y-%m-%d %X", time.localtime())
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
         
         message = {}
         message['magnetometer'] = str(mag_data)
@@ -145,4 +145,4 @@ while True:
         myAWSIoTMQTTClient.publish(topic, messageJson, 1)
         if args.mode == 'publish':
             print('Published topic %s: %s\n' % (topic, messageJson))
-    time.sleep(0.5)
+    
